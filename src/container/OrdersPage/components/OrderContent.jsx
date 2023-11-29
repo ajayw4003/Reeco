@@ -107,11 +107,17 @@ const OrderContent = () => {
     setOpenPopup(true);
   }
 
+  function closePopup() {
+    setModalData('')
+    setOpenPopup(false);
+  }
+
   function renderPopup() {
     if(openPopup) {
       return <ConfirmPopup 
         message="lorem ipsum missing product ?"
         title="Missing Product"
+        closeHandler={closePopup}
         // yesHandler={approveProduct}
         // noHandler={() => rejectProduct}
       />

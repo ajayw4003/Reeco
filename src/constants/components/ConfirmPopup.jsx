@@ -1,6 +1,7 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const PopupDiv = styled.div`
 justify-content: center;
@@ -36,16 +37,27 @@ const ModalContainer = styled.div`
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
 `
+const TitleDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+const IconDiv = styled(ClearIcon)`
+  cursor: pointer;
+`
 
 const ConfirmPopup = (props) => {
-  const { message, yesHandler, noHanlder, title="Alert" } = props;
+  const { message, yesHandler, closeHandler, noHanlder, title="Alert" } = props;
   function confirm() {
     yesHandler()
   }
   return (
     <ModalContainer>
       <PopupDiv>
-        <h3>{title}</h3>
+        <TitleDiv>
+          <h3>{title}</h3>
+          <IconDiv onClick={closeHandler}  />
+        </TitleDiv>
         <div>
         {message}
         </div>
