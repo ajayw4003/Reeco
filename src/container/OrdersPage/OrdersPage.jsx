@@ -17,11 +17,12 @@ const OrdersPage = () => {
   const loading = useSelector(state => state.loading)
   useEffect(() => {
     dispatch(getOrderDetails());
+    console.log('useEffect')
   }, [])
 
-  if(loading) {
-    return <h2>No Data Found</h2>
-  }
+  // if(loading) {
+  //   return <h2>No Data Found</h2>
+  // }
   return (
     <div className='mt-31'>
       <OrderPageHeader />

@@ -7,7 +7,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 import PrintIcon from '@mui/icons-material/Print';
 import { Button } from '@material-ui/core';
 import SearchIcon from '@mui/icons-material/Search';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import ConfirmPopup from '../../../constants/components/ConfirmPopup'
+import { approveProduct, rejectProduct } from '../OrderDetailsSlice'
 
 const TableDiv = styled(Paper)`
   margin-top: 15px;
@@ -70,9 +72,64 @@ const ButtonDiv = styled(Button)`
   }
 `
 
+const ApproveDiv = styled.div`
+  height: 3%;
+  width: 5%;
+  border: 1px solid green;
+  border-radius: 15px;
+  background-color: #078407;
+  color: white;
+`
+const RejctedDiv = styled.div`
+  height: 3%;
+  width: 5%;
+  border: 1px solid green;
+  border-radius: 15px;
+  background-color: #972e0e;
+  color: white;
+`
+
 const OrderContent = () => {
   const orderDetails = useSelector(state => state.order.orderDetails)
-  console.log('orderDetails---->', orderDetails)
+  const productObj = useSelector(state => state.order.productObj)
+  const dispatch = useDispatch();
+
+  const [openPopup, setOpenPopup] = useState(false);
+  const [modalData, setModalData] = useState(false);
+  
+  function handleApporve(productData) {
+    dispatch(approveProduct(productData.product_id))
+    console.log('orderDetails==>', orderDetails, productObj)
+  }
+
+  function handleReject(productData) {
+    setModalData(productData)
+    setOpenPopup(true);
+  }
+
+  function renderPopup() {
+    if(openPopup) {
+      return <ConfirmPopup 
+        message="lorem ipsum missing product ?"
+        title="Missing Product"
+        // yesHandler={approveProduct}
+        // noHandler={() => rejectProduct}
+      />
+    }
+    return null
+  }
+
+  function getProductStatus(productId) {
+    switch(productObj[productId]?.status){
+      case 1:
+        return <ApproveDiv>Approved</ApproveDiv>;
+      case 2:
+        return <RejctedDiv>Missing</RejctedDiv>;
+      default:
+        return null;
+    }
+  }
+
   return (
     <TableDiv elevation="1">
       <SearchDiv>
@@ -115,11 +172,11 @@ const OrderContent = () => {
               <TableCell align="right">{product.price || '-'}</TableCell>
               <TableCell align="right">{product.qty || '-'}</TableCell>
               <TableCell align="right">{product.total || '-'}</TableCell>
-              <TableCell align="right">{product.status || '-'}</TableCell>
+              <TableCell align="right">{getProductStatus(product.produt_id)}</TableCell>
               <IconCell align="right">
                 <IconDiv>
-                  <CheckIcon />
-                  <ClearIcon />
+                  <CheckIcon onClick={() => handleApporve(product)} />
+                  <ClearIcon onClick={() => handleReject(product)}/>
                   <span>Edit</span>
                 </IconDiv>
               </IconCell>
@@ -127,6 +184,7 @@ const OrderContent = () => {
           ))}
         </TableBody>
       </Table>
+      {renderPopup()}
     </TableDiv>
   );
 };
