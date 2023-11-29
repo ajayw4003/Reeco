@@ -99,7 +99,6 @@ const OrderContent = () => {
   
   function handleApporve(productData) {
     dispatch(approveProduct(productData.product_id))
-    console.log('orderDetails==>', orderDetails, productObj)
   }
 
   function handleReject(productData) {
