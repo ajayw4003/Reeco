@@ -7,6 +7,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import PrintIcon from '@mui/icons-material/Print';
 import { Button } from '@material-ui/core';
 import SearchIcon from '@mui/icons-material/Search';
+import { useSelector } from 'react-redux';
 
 const TableDiv = styled(Paper)`
   margin-top: 15px;
@@ -70,6 +71,8 @@ const ButtonDiv = styled(Button)`
 `
 
 const OrderContent = () => {
+  const orderDetails = useSelector(state => state.order.orderDetails)
+  console.log('orderDetails---->', orderDetails)
   return (
     <TableDiv elevation="1">
       <SearchDiv>
@@ -100,7 +103,7 @@ const OrderContent = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {dummyData.products.map((product) => (
+          {orderDetails?.products?.map((product) => (
             <TableRow
               key={product.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

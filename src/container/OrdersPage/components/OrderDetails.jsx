@@ -7,6 +7,7 @@ import {
 
 import styled from 'styled-components';
 import dummyData from '../dummyData.json'
+import { useSelector } from 'react-redux';
 
 const FlexDiv = styled.div`
   display: flex;
@@ -31,21 +32,22 @@ const Divide = styled.div`
 `
 
 const OrderDetails = () => {
+  const orderDetails = useSelector(state => state.order.orderDetails)
   return (
     <FlexDiv>
       <DivBlock>
         <Typography variant='subtitle2'>Supplier</Typography>
-        <BoldDiv>{dummyData.supplier}</BoldDiv>
+        <BoldDiv>{orderDetails.supplier}</BoldDiv>
       </DivBlock>
       <Divide />
       <DivBlock>
         <Typography variant='subtitle2'>Shiiping Date</Typography>
-        <BoldDiv>{dummyData.shipping_date}</BoldDiv>
+        <BoldDiv>{orderDetails.shipping_date}</BoldDiv>
       </DivBlock>
       <Divide />
       <DivBlock>
         <Typography variant='subtitle2'>Total</Typography>
-        <BoldDiv>{dummyData.total_cost}</BoldDiv>
+        <BoldDiv>{orderDetails.total_cost}</BoldDiv>
       </DivBlock>
       <Divide />
       <DivBlock>
@@ -55,12 +57,12 @@ const OrderDetails = () => {
       <Divide />
       <DivBlock>
         <Typography variant='subtitle2'>Department</Typography>
-        <BoldDiv>{dummyData.department}</BoldDiv>
+        <BoldDiv>{orderDetails.department}</BoldDiv>
       </DivBlock>
       <Divide />
       <DivBlock>
         <Typography variant='subtitle2'>Status</Typography>
-        <BoldDiv>{dummyData.status}</BoldDiv>
+        <BoldDiv>{orderDetails.status}</BoldDiv>
       </DivBlock>
     </FlexDiv>
   );

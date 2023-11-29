@@ -6,7 +6,7 @@ import {
 } from "@material-ui/core";
 
 import styled from 'styled-components';
-import dummyData from '../dummyData.json'
+import {  useSelector } from 'react-redux';
 
 // Styled components for different parts
 
@@ -40,10 +40,11 @@ const CommonStyledButton  = styled(Button)`
 `
 
 const OrderPageHeader = () => {
+  const orderDetails = useSelector(state => state.order.orderDetails)
   return (
         <HeaderDiv>
           <h2>
-            Order {dummyData.order_id}
+            Order {orderDetails.order_id}
           </h2>
           <FlexDiv>
             <CommonStyledButton variant='outlined'>Back</CommonStyledButton>
