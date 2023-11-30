@@ -72,21 +72,43 @@ const ButtonDiv = styled(Button)`
   }
 `
 
-const ApproveDiv = styled.div`
-  height: 3%;
-  width: 5%;
+const Capsule = styled.div`
+  height: 100%;
+  width: 100%;
   border: 1px solid green;
-  border-radius: 15px;
-  background-color: #078407;
+  border-radius: 25px;
   color: white;
+  padding: 10px;
 `
-const RejctedDiv = styled.div`
-  height: 3%;
-  width: 5%;
-  border: 1px solid green;
-  border-radius: 15px;
-  background-color: #972e0e;
-  color: white;
+const ApproveDiv = styled(Capsule)`
+  background-color: #078407;
+`
+const RejctedDiv = styled(Capsule)`
+  background-color: #d55c37;
+`
+const StatusDiv = styled(TableCell)`
+  align-items: center;
+  justify-content: center;
+`
+const CheckIconDiv = styled(CheckIcon)`
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 2px;
+  width: 100%;
+  border-radius: 50%;
+  &:hover{
+    background-color: #75b975;
+  }
+`
+const ClearIconDiv = styled(ClearIcon)`
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 2px;
+  width: 100%;
+  border-radius: 50%;
+  &:hover{
+    background-color: #e98060;
+  }
 `
 
 const OrderContent = () => {
@@ -96,7 +118,7 @@ const OrderContent = () => {
 
   const [openPopup, setOpenPopup] = useState(false);
   const [modalData, setModalData] = useState(false);
-  
+
   function handleApporve(productData) {
     dispatch(approveProduct(productData.product_id))
   }
@@ -111,14 +133,17 @@ const OrderContent = () => {
     setOpenPopup(false);
   }
 
+  function decline() {
+    dispatch(rejectProduct(modalData.product_id))
+  }
+
   function renderPopup() {
     if(openPopup) {
       return <ConfirmPopup 
         message="lorem ipsum missing product ?"
         title="Missing Product"
         closeHandler={closePopup}
-        // yesHandler={approveProduct}
-        // noHandler={() => rejectProduct}
+        yesHandler={decline}
       />
     }
     return null
@@ -177,11 +202,11 @@ const OrderContent = () => {
               <TableCell align="right">{product.price || '-'}</TableCell>
               <TableCell align="right">{product.qty || '-'}</TableCell>
               <TableCell align="right">{product.total || '-'}</TableCell>
-              <TableCell align="right">{getProductStatus(product.produt_id)}</TableCell>
+              <StatusDiv align="center">{getProductStatus(product.product_id)}</StatusDiv>
               <IconCell align="right">
                 <IconDiv>
-                  <CheckIcon onClick={() => handleApporve(product)} />
-                  <ClearIcon onClick={() => handleReject(product)}/>
+                  <CheckIconDiv onClick={() => handleApporve(product)} />
+                  <ClearIconDiv onClick={() => handleReject(product)}/>
                   <span>Edit</span>
                 </IconDiv>
               </IconCell>

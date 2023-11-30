@@ -10,10 +10,8 @@ const initialState = {
 
 // get order details API call 
 export const getOrderDetails = createAsyncThunk('getOrderDetails', async() => {
-  console.log('outside')
   try{
     const response = dummyData;
-    console.log('insidee')
     return response
   } catch(err) {
     console.log(err)
@@ -28,7 +26,6 @@ const OrderDetailsSlice = createSlice({
   initialState,
   reducers: {
     approveProduct: (state, action) => {
-      console.log('action', action, state)
       if(state.productObj[action.payload]) {
         state.productObj[action.payload].status = 1
       }
@@ -61,7 +58,6 @@ const OrderDetailsSlice = createSlice({
   },
 })
 
-console.log('orderReducer', OrderDetailsSlice)
 export const { approveProduct, rejectProduct } = OrderDetailsSlice.actions;
 
 export default OrderDetailsSlice.reducer;

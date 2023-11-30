@@ -51,19 +51,23 @@ const ConfirmPopup = (props) => {
   function confirm() {
     yesHandler()
   }
+
+  function closeBox() {
+    closeHandler();
+  }
   return (
     <ModalContainer>
       <PopupDiv>
         <TitleDiv>
           <h3>{title}</h3>
-          <IconDiv onClick={closeHandler}  />
+          <IconDiv onClick={closeBox}  />
         </TitleDiv>
         <div>
         {message}
         </div>
         <ButtonDiv>
           <Button onClick={confirm}>Yes</Button>
-          <Button onClick={noHanlder}>No</Button>
+          <Button onClick={closeBox}>No</Button>
         </ButtonDiv>
       </PopupDiv>
     </ModalContainer>
