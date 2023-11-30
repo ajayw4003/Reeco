@@ -10,6 +10,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import ConfirmPopup from '../../../constants/components/ConfirmPopup'
 import { approveProduct, rejectProduct } from '../OrderDetailsSlice'
+import AvocadoHass from '../../../Assets/AvocadoHass.jpg'
 
 const TableDiv = styled(Paper)`
   margin-top: 15px;
@@ -110,6 +111,10 @@ const ClearIconDiv = styled(ClearIcon)`
     background-color: #e98060;
   }
 `
+const ImageDiv = styled.div`
+  display: flex;
+  align-items: center;
+`
 
 const OrderContent = () => {
   const orderDetails = useSelector(state => state.order.orderDetails)
@@ -135,6 +140,7 @@ const OrderContent = () => {
 
   function decline() {
     dispatch(rejectProduct(modalData.product_id))
+    closePopup();
   }
 
   function renderPopup() {
@@ -195,8 +201,11 @@ const OrderContent = () => {
               key={product.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {product.name}
+              <TableCell>
+                <ImageDiv>
+                  <img src={AvocadoHass} alt="Alt img" height="10%" width="10%" />
+                  {product.name}
+                </ImageDiv>
               </TableCell>
               <TableCell align="right">{product.brand || '-'}</TableCell>
               <TableCell align="right">{product.price || '-'}</TableCell>

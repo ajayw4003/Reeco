@@ -28,6 +28,11 @@ const ButtonDiv = styled.div`
   align-items: end;
   align-items: center;
 `
+const HoverButton = styled(Button)`
+  &:hover{
+    background-color: #a59b9b;
+  }
+`
 
 const ModalContainer = styled.div`
     position: absolute;
@@ -66,8 +71,8 @@ const ConfirmPopup = (props) => {
         {message}
         </div>
         <ButtonDiv>
-          <Button onClick={confirm}>Yes</Button>
-          <Button onClick={closeBox}>No</Button>
+          <HoverButton onClick={confirm}>Yes</HoverButton>
+          <HoverButton onClick={closeBox}>No</HoverButton>
         </ButtonDiv>
       </PopupDiv>
     </ModalContainer>

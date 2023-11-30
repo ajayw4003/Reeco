@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  Toolbar,
   Typography,
-  Button
 } from "@material-ui/core";
 
 import styled from 'styled-components';
-import dummyData from '../dummyData.json'
+import IcecreamOutlinedIcon from '@mui/icons-material/IcecreamOutlined';
+import FastfoodOutlinedIcon from '@mui/icons-material/FastfoodOutlined';
+import RamenDiningOutlinedIcon from '@mui/icons-material/RamenDiningOutlined';
 import { useSelector } from 'react-redux';
 
 const FlexDiv = styled.div`
@@ -30,6 +30,12 @@ const Divide = styled.div`
   border-left: 2px solid #cbcbcb;
   height: 60px;
 `
+const CatDiv = styled.div`
+  margin: 15px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+`
 
 const OrderDetails = () => {
   const orderDetails = useSelector(state => state.order.orderDetails)
@@ -52,7 +58,11 @@ const OrderDetails = () => {
       <Divide />
       <DivBlock>
         <Typography variant='subtitle2'>Category</Typography>
-        <BoldDiv>-Category</BoldDiv>
+        <CatDiv>
+          <IcecreamOutlinedIcon />
+          <FastfoodOutlinedIcon />
+          <RamenDiningOutlinedIcon />
+        </CatDiv>
       </DivBlock>
       <Divide />
       <DivBlock>

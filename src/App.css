@@ -12,31 +12,3 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-/* Navbar */
-.navbar{
-  background-color: rgb(36, 117, 36) !important;
-  color: white;
-}
-.navlinks{
-  display: flex;
-  justify-content: space-evenly;
-  font-size: 20px;
-}
-.logo{
-  cursor: pointer;
-}
-.link{
-  text-decoration: none;
-  color: white;
-  margin-right: 10px;
-}
-.justify-content{
-  justify-content: space-between;
-}
-.mt-31{
-  margin-top: 51;
-}
-.padding-15{
-  padding: 15px;
-}
